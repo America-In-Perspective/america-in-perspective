@@ -1,0 +1,5 @@
+async function aipcCopy(s){try{await navigator.clipboard.writeText(s);return true}catch(e){let t=document.createElement('textarea');t.value=s;document.body.append(t);t.select();let ok=document.execCommand('copy');t.remove();return ok}}
+function aipcDownload(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
+document.querySelectorAll('.menu-btn').forEach(b=>b.addEventListener('click',()=>{let parent=b.closest('.navitem');let open=parent.classList.toggle('open');b.setAttribute('aria-expanded',String(open));}));document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.navitem.open').forEach(x=>{x.classList.remove('open');x.querySelector('.menu-btn')?.setAttribute('aria-expanded','false')})});
+
+document.addEventListener('click',e=>{document.querySelectorAll('.navitem.open').forEach(el=>{if(!el.contains(e.target)){el.classList.remove('open');el.querySelector('.menu-btn')?.setAttribute('aria-expanded','false')}})});

@@ -1,0 +1,1 @@
+document.getElementById('glossarySearch').addEventListener('input',e=>{let q=e.target.value.toLowerCase();document.querySelectorAll('#glossaryTerms>div').forEach(x=>x.hidden=!x.textContent.toLowerCase().includes(q))});

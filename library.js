@@ -1,0 +1,63 @@
+const sourceUS='https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html';const sourceJP='https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/japan_319bfc39-en.html';
+const peerRows=[
+{name:'United States',life:78.4,spend:14885},
+{name:'Japan',life:84.1,spend:5790},
+{name:'South Korea',life:83.5,spend:4797},
+{name:'Australia',life:83.0,spend:7469},
+{name:'France',life:83.0,spend:7367},
+{name:'Canada',life:81.7,spend:7301},
+{name:'Germany',life:81.1,spend:9365},
+{name:'Netherlands',life:81.9,spend:8436},
+{name:'Sweden',life:83.4,spend:7871},
+{name:'Switzerland',life:84.3,spend:9963},
+{name:'OECD average',life:81.1,spend:5967}];
+let metric='life';
+const fmtLife=n=>n.toFixed(1);const fmtSpend=n=>'$'+n.toLocaleString('en-US');
+function displayRows(){return [...peerRows].sort((a,b)=>metric==='spend'?b.spend-a.spend:metric==='life'?b.life-a.life:0)}
+function linesForMetric(){return displayRows().map(r=>r.name+' — '+(metric==='spend'?fmtSpend(r.spend):metric==='life'?fmtLife(r.life)+' years':fmtLife(r.life)+' years; '+fmtSpend(r.spend)+' per person'))}
+async function copyValue(s){try{await navigator.clipboard.writeText(s);return true}catch(e){let t=document.createElement('textarea');t.value=s;document.body.append(t);t.select();let ok=document.execCommand('copy');t.remove();return ok}}
+function downloadBlob(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
+/* Healthcare research library: verified figures separated from research topics */
+const healthResearch=[
+ {id:'preventable',group:'prevention',title:'Preventable mortality',question:'How many premature deaths could mainly be avoided through effective prevention?',status:'verified',unit:'Age-standardized deaths per 100,000 residents, under 75',year:'2023 or nearest available; OECD Health at a Glance 2025',numbers:[['United States',217],['OECD average',145]],insight:'The U.S. preventable mortality rate was approximately 50% above the OECD average.',policy:'Investigate tobacco control, injury prevention, vaccination, environmental protections and other population-level interventions.',source:'https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html'},
+ {id:'treatable',group:'effectiveness',title:'Treatable mortality',question:'How often do people die from conditions that timely, effective medical treatment could address?',status:'verified',unit:'Age-standardized deaths per 100,000 residents, under 75',year:'2023 or nearest available; OECD Health at a Glance 2025',numbers:[['United States',95],['OECD average',77]],insight:'The U.S. treatable mortality rate was approximately 23% above the OECD average.',policy:'Investigate primary care, timely diagnosis, emergency treatment, medication access and continuity of care.',source:'https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html'},
+ {id:'life',group:'longevity',title:'Life expectancy at birth',question:'How many years can a newborn expect to live?',status:'verified',unit:'Years at birth; latest value in OECD 2025 country note',year:'2023 or nearest available',numbers:[['United States',78.4],['OECD average',81.1]],insight:'U.S. life expectancy was 2.7 years below the OECD average in the cited comparison. Newer U.S. data for 2024 report 79.0 years, so years must remain explicit.',policy:'Examine healthcare access, preventable deaths, economic conditions and behavioral and environmental risks.',source:'https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html'},
+ {id:'spending',group:'access',title:'Healthcare spending per person',question:'How much do countries spend on healthcare?',status:'verified',unit:'US dollars per person, adjusted for purchasing power',year:'2024 or nearest available; OECD Health at a Glance 2025',numbers:[['United States',14885],['OECD average',5967]],insight:'The U.S. spent roughly 2.5 times the OECD average per person on healthcare.',policy:'Compare medical prices, insurance administration, provider payments and public-private financing.',source:'https://www.oecd.org/en/publications/health-at-a-glance-2025_8f9e3f98-en/full-report/health-expenditure-per-capita_affe6b0a.html'},
+ {id:'infant',group:'longevity',title:'Infant mortality',question:'How many infants die before their first birthday?',status:'pending',policy:'Compare prenatal support, birth outcomes, neonatal care and social conditions. Note differences in registration of extremely premature births.'},
+ {id:'maternal',group:'longevity',title:'Maternal mortality',question:'How safe are pregnancy, childbirth and postpartum care?',status:'pending',policy:'Compare prenatal access, emergency obstetric care, maternal health and postpartum coverage. Ensure consistent 42-day definitions.'},
+ {id:'hale',group:'longevity',title:'Healthy life expectancy',question:'How many years can people expect to live in good health?',status:'pending',policy:'Use WHO HALE estimates and assess prevention, disability and long-term health management.'},
+ {id:'chronic',group:'prevention',title:'Chronic disease burden',question:'How common are cardiovascular disease, diabetes, cancer and chronic respiratory illness?',status:'pending',policy:'Separate incidence, prevalence, survival and mortality; use age-standardized measures and avoid assuming higher prevalence always means worse care.'},
+ {id:'premature',group:'prevention',title:'Premature mortality from major chronic diseases',question:'What is the probability of dying between ages 30 and 70 from four major chronic disease groups?',status:'pending',policy:'Use the WHO indicator covering cardiovascular disease, cancer, diabetes and chronic respiratory disease.'},
+ {id:'vaccine',group:'prevention',title:'Vaccination coverage',question:'How reliably do populations receive recommended vaccines?',status:'pending',policy:'Compare DTP, two-dose measles, influenza in older adults and HPV; separate changing COVID-19 eligibility and recommendations.'},
+ {id:'hospital',group:'effectiveness',title:'Avoidable hospitalizations',question:'How often are people admitted for conditions that strong primary care may help manage?',status:'pending',policy:'Examine asthma, COPD and diabetes admissions with comparable definitions and age adjustment.'},
+ {id:'mental',group:'longevity',title:'Mental health and suicide',question:'How do mental health outcomes and access to services vary?',status:'pending',policy:'Use suicide mortality and access metrics, while respecting reporting and diagnostic differences.'},
+ {id:'overdose',group:'prevention',title:'Drug overdose mortality',question:'How frequently do drug poisonings cause death?',status:'pending',policy:'Compare prevention, addiction treatment, emergency response and drug-market circumstances.'},
+ {id:'coverage',group:'access',title:'Insurance and financial barriers',question:'How often is care delayed or forgone because of cost?',status:'pending',policy:'Distinguish uninsured, underinsured and unmet medical needs; compare consistent survey measures.'},
+ {id:'inequality-income',group:'inequality',title:'Health by income',question:'How does life expectancy differ between higher- and lower-income Americans?',status:'pending',policy:'Prioritize U.S. income and longevity trends; distinguish historical cohort studies from current estimates.'},
+ {id:'inequality-race',group:'inequality',title:'Health by race and ethnicity',question:'How do health outcomes differ across U.S. population groups?',status:'pending',policy:'Use CDC definitions, note that racial categories are not consistent across countries, and examine relevant social and healthcare factors.'},
+ {id:'inequality-geography',group:'inequality',title:'Health by geography',question:'How much do health outcomes vary across U.S. states and communities?',status:'pending',policy:'Explore state, county, urban-rural and neighborhood disparities using clearly identified geographic units.'}
+];
+const elHealthCards=document.getElementById('healthCards'),feedHealth=document.getElementById('libraryFeedback');
+function makeHealthCard(d){let art=document.createElement('article');art.className='research-card';art.dataset.group=d.group;art.dataset.id=d.id;
+ const meta=document.createElement('div');meta.className='meta';meta.textContent=d.status==='verified'?'Verified OECD comparison':'Research in progress';
+ let title=document.createElement('h3');title.textContent=d.title;
+ let q=document.createElement('p');q.textContent=d.question;
+ art.append(meta,title,q);
+ if(d.status==='verified'){
+  let block=document.createElement('div');block.className='statline';block.innerHTML='<strong>United States</strong> <b>'+d.numbers[0][1].toLocaleString('en-US')+'</b> &nbsp; · &nbsp; <strong>OECD average</strong> <b>'+d.numbers[1][1].toLocaleString('en-US')+'</b>';
+  let unit=document.createElement('p');unit.className='footnote';unit.textContent=d.unit+' · '+d.year;
+  let finding=document.createElement('p');finding.textContent=d.insight;
+  art.append(block,unit,finding);
+ }else{let pending=document.createElement('p');pending.className='pending';pending.textContent='Data not yet published here. The country chart and historical trend will be added after verification.';art.append(pending)}
+ let policies=document.createElement('p');policies.textContent='Policy questions: '+d.policy;art.append(policies);
+ let actions=document.createElement('div');actions.className='research-actions';
+ if(d.status==='verified'){
+  const makeButton=(label,handler)=>{let b=document.createElement('button');b.className='smallbtn';b.textContent=label;b.addEventListener('click',handler);actions.append(b)};
+  makeButton('📋 Copy finding',async()=>{let txt=d.title+': '+d.insight+' ('+d.numbers.map(x=>x[0]+' '+x[1].toLocaleString('en-US')).join('; ')+'). '+d.unit+'; '+d.year+'. Source: OECD, Health at a Glance 2025. '+d.source;let ok=await copyValue(txt);feedHealth.textContent=ok?'Copied concise finding with citation.':'Copy blocked; please select text.'});
+  makeButton('🖼 Save chart',()=>{let c=document.createElement('canvas');c.width=1600;c.height=770;let ctx=c.getContext('2d');ctx.scale(2,2);ctx.fillStyle='#fff';ctx.fillRect(0,0,800,385);ctx.fillStyle='#193044';ctx.font='bold 27px Georgia';ctx.fillText('America in Perspective',30,44);ctx.font='bold 23px system-ui';ctx.fillText(d.title,30,84);ctx.font='14px system-ui';ctx.fillStyle='#536572';ctx.fillText(d.unit,30,110);let mx=Math.max(...d.numbers.map(x=>x[1]))*1.12;d.numbers.forEach((x,i)=>{let y=155+i*72;ctx.fillStyle='#193044';ctx.font='bold 16px system-ui';ctx.fillText(x[0],30,y);ctx.fillStyle='#e9f0f2';ctx.fillRect(195,y-16,450,24);ctx.fillStyle=i===0?'#a95143':'#5f96a7';ctx.fillRect(195,y-16,450*x[1]/mx,24);ctx.fillStyle='#193044';ctx.fillText(x[1].toLocaleString('en-US'),660,y+2)});ctx.fillStyle='#586976';ctx.font='12px system-ui';ctx.fillText('Source: OECD Health at a Glance 2025 | '+d.year,30,340);ctx.fillText('OECD average covers all OECD members. Figures are not causal evidence.',30,365);c.toBlob(b=>{if(b){downloadBlob(b,'america-in-perspective-'+d.id+'.png');feedHealth.textContent='PNG chart downloaded for '+d.title+'.'}},'image/png')});
+  if(d.id==='spending'){let policyLink=document.createElement('a');policyLink.className='smallbtn';policyLink.href='healthcare-cost.html';policyLink.textContent='Explore policy →';actions.append(policyLink)}else{let policyStatus=document.createElement('span');policyStatus.className='smallbtn policy-pending';policyStatus.textContent='Policy investigation coming soon';policyStatus.setAttribute('aria-label',d.title+': policy investigation coming soon');actions.append(policyStatus)}
+  let link=document.createElement('a');link.href=d.source;link.target='_blank';link.rel='noopener';link.textContent='Original OECD source ↗';actions.append(link)
+ }
+ art.append(actions);return art}
+healthResearch.forEach(d=>elHealthCards.append(makeHealthCard(d)));
+document.querySelectorAll('#healthFilters [data-filter]').forEach(b=>b.addEventListener('click',()=>{let chosen=b.dataset.filter;document.querySelectorAll('#healthFilters [data-filter]').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b))});elHealthCards.querySelectorAll('.research-card').forEach(card=>card.hidden=chosen!=='all'&&card.dataset.group!==chosen);feedHealth.textContent=chosen==='all'?'Showing all healthcare research topics.':'Filtered healthcare research topics.'}));
