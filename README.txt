@@ -1,8 +1,17 @@
-America in Perspective — Consolidated Version 7
+America in Perspective — Consolidated Review Revision
 
-This package contains the complete static website, including twelve topic landing pages, expanded healthcare comparisons, and the agreed navigation and research-card changes.
+Open index.html locally in Edge. Upload all files together to the root of your GitHub Pages repository when approved.
 
-To preview: extract the ZIP and open index.html in Edge.
-To publish on GitHub Pages: upload ALL contents of this folder (HTML, CSS, JS, README) to the repository root on the main branch, replacing same-named files. The website uses relative links and has no build step.
+Metric files:
+  health-metrics.html — Life expectancy at birth
+  life-expectancy-65.html — Age 65, male/female comparisons
+  healthcare-spending.html — Spending
+  spending-life-expectancy.html — Comparison table
+  treatable-mortality.html — Treatable deaths
 
-IMPORTANT: This is a working public research project. Some pages contain plans, not published findings. Policy research for metrics other than healthcare spending is not yet published and is marked accordingly. Compare figures and sources again before the wider January 2027 launch.
+Done: isolated metric pages, shared metric sidebar, copy/chart/CSV controls, homepage Metrics and Policy links, removed section 5 highlight, preserved age 65.
+Pending data task: 14-country male/female life expectancy at birth, not yet verified. OECD-wide 2023 male/female figures appear on the birth page but no unverified country figures are used.
+
+Please test the sidebar, table and chart exports, homepage links, and mobile layout.
+
+November 25, 2026 editorial review release: Adds Why This Measure Matters and visible Key Finding for life expectancy at birth, life expectancy at 65, healthy life expectancy and treatable mortality. Copy Finding copies the visible text plus source and permanent metric-page address. This remains a working research preview; not all metrics or policy investigations are published.

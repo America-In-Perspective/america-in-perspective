@@ -1,0 +1,97 @@
+{
+  "source": "https://data-explorer.oecd.org/vis?df%5Bag%5D=OECD.ELS.SPD&df%5Bds%5D=dsDisseminateFinalDMZ&df%5Bid%5D=DSD_PAG%40DF_DEC&dq=.A.....&pd=2024%2C2024&to%5BTIME_PERIOD%5D=true&vw=tb",
+  "report": "https://www.oecd.org/en/publications/pensions-at-a-glance-2025_e40274c1-en/full-report/life-expectancy_02c88784.html",
+  "year": 2024,
+  "data": [
+    {
+      "country": "Australia",
+      "women": 23.2,
+      "men": 20.9,
+      "both": 22.1
+    },
+    {
+      "country": "Canada",
+      "women": 22.8,
+      "men": 19.9,
+      "both": 21.4
+    },
+    {
+      "country": "Denmark",
+      "women": 21.5,
+      "men": 18.8,
+      "both": 20.2
+    },
+    {
+      "country": "France",
+      "women": 23.9,
+      "men": 20.2,
+      "both": 22.1
+    },
+    {
+      "country": "Germany",
+      "women": 21.5,
+      "men": 18.4,
+      "both": 20.0
+    },
+    {
+      "country": "Italy",
+      "women": 22.9,
+      "men": 19.8,
+      "both": 21.4
+    },
+    {
+      "country": "Japan",
+      "women": 24.9,
+      "men": 20.1,
+      "both": 22.5
+    },
+    {
+      "country": "South Korea",
+      "women": 23.7,
+      "men": 19.2,
+      "both": 21.5
+    },
+    {
+      "country": "Netherlands",
+      "women": 21.4,
+      "men": 19.0,
+      "both": 20.2
+    },
+    {
+      "country": "Norway",
+      "women": 22.1,
+      "men": 19.9,
+      "both": 21.0
+    },
+    {
+      "country": "Sweden",
+      "women": 22.3,
+      "men": 19.7,
+      "both": 21.0
+    },
+    {
+      "country": "Switzerland",
+      "women": 23.0,
+      "men": 20.2,
+      "both": 21.6
+    },
+    {
+      "country": "United Kingdom",
+      "women": 21.3,
+      "men": 18.8,
+      "both": 20.1
+    },
+    {
+      "country": "United States",
+      "women": 21.2,
+      "men": 18.7,
+      "both": 20.0
+    },
+    {
+      "country": "OECD average",
+      "women": 21.6,
+      "men": 18.5,
+      "both": 20.1
+    }
+  ]
+}

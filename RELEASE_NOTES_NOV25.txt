@@ -1,0 +1,7 @@
+America in Perspective — editorial review release, November 25, 2026
+
+Four metric pages now show Why This Measure Matters above the data chart and a shareable Key Finding below it. Copy Finding takes its text from the visible finding, appending the public metric URL.
+
+Research caveats: Treatable mortality Norway figure remains unreported in this source. Healthy-life-expectancy OECD average remains unverified and is omitted. Age-65 combined-sex chart and Key Finding use simple arithmetic means of male/female remaining-life estimates, not a population-weighted both-sexes measure; at-birth and age-65 data are different OECD/UN series. Not all country/year data have been independently audited for this preview.
+
+Deployment: unzip, open America_in_Perspective, upload its CONTENTS (not the containing folder) to the existing GitHub Pages repository root, replacing existing files. Keep all HTML, CSS, JS and JSON together. Refresh browser after publication.
